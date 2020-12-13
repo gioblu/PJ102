@@ -2,7 +2,7 @@
 ## PJ102
 <img src="images/PJ102-front.jpg" style="display: inline-block;" width="400"><img src="images/PJ102-back.jpg" style="display: inline-block;" width="400">
 
-The PJ102 module is a 36.1x34mm open-source, stand-alone, programmable temperature and humidity sensor based on DHT22 and ATtiny85 with [PJON](https://github.com/gioblu/PJON/) over [PJDL](https://github.com/gioblu/PJON/blob/master/src/strategies/SoftwareBitBang/specification) networking. It needs only 3 pins (PJDL, 5v, GND) to operate transmitting samples and receiving incoming configuration on the same PJON IO pin. 
+The PJ102 module is a 36.1x34mm open-source, stand-alone, programmable temperature and humidity sensor based on DHT22 and ATtiny85 with [PJON](https://github.com/gioblu/PJON/) over [PJDL](https://github.com/gioblu/PJON/blob/master/src/strategies/SoftwareBitBang/specification) networking. It needs only 3 pins (PJDL, 5v, GND) to operate transmitting samples and receiving incoming configuration on the same PJON IO pin. PJ102 consumes around 0.162w when supplied with 9v.
 
 ```cpp  
  _______   _______   _______
