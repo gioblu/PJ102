@@ -3,7 +3,7 @@
 ![PJON](images/PJ102-front-min.jpg)
 ![PJON](images/PJ102-back-min.jpg)
 
-The PJ102 module is a 14.2x13.4mm open-source, stand-alone, programmable temperature and humidity smart sensor based on DHT22 and ATtiny85 with [PJON](https://github.com/gioblu/PJON/) over [PJDL](https://github.com/gioblu/PJON/blob/master/src/strategies/SoftwareBitBang/specification) networking. It needs only 3 pins (PJDL, 5v, GND) to operate transmitting samples and receiving incoming configuration on the same PJON IO pin. Multiple PJ102s can be connected in parallel on the same bus, sharing the same power, ground and data connection.
+The PJ102 module is a 14.2x13.4mm open-source, stand-alone, programmable temperature and humidity smart sensor based on DHT22 and ATtiny85 with [PJON](https://github.com/gioblu/PJON/) over [PJDL](https://github.com/gioblu/PJON/blob/master/src/strategies/SoftwareBitBang/specification) networking. It needs only 3 pins (PJDL, 5v, GND) to operate transmitting samples and receiving incoming configuration on the same PJON IO pin. 
 
 ```cpp  
  _______   _______   _______
@@ -14,7 +14,7 @@ ____|||_______|||_______|||____|_ SoftwareBitBang bus
 _____||________||________||______ +5v
 ______|_________|_________|______ GND
 ```
-Many PJ102s can be connected to the same [SoftwareBitBang](https://github.com/gioblu/PJON/src/strategies/SoftwareBitBang/README.md) bus. Each PJ102 is running an instance of the PJON protocol stack with its own configurable device id, so many can coexist on the same medium.
+Multiple PJ102s can be connected in parallel on the same [SoftwareBitBang](https://github.com/gioblu/PJON/src/strategies/SoftwareBitBang/README.md) bus sharing the same power, ground and data connection. Each PJ102 is running an instance of the PJON protocol stack with its own configurable device id, so many can coexist on the same medium.
 
 PJ102 has been engineered with the strong feeling that, in the future, "smart houses" will not necessarily host a multitude of inefficient embedded real-time operative systems in whatever "thing" while exposing vulnerabilities out of the physical boundaries of houses. Otherwise, more probably, will host many simple, less power-hungry microcontrollers, connected to a wired communication bus.
 
