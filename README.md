@@ -10,7 +10,7 @@ The PJ102 module is a 14.2x13.4mm open-source, stand-alone, programmable tempera
 | PJ102 | | PJ102 | | PJ102 |
 |_______| |_______| |_______|
 ____|||_______|||_______|||______ SoftwareBitBang bus
-_____||________||________||______ +5v
+_____||________||________||______ +9v
 ______|_________|_________|______ GND
 ```
 Multiple PJ102s can be connected in parallel on the same [SoftwareBitBang](https://github.com/gioblu/PJON/src/strategies/SoftwareBitBang/README.md) bus sharing the same power, ground and data connection. Each PJ102 is running an instance of the PJON protocol stack with its own configurable device id, so many can coexist on the same medium.
