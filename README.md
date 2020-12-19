@@ -63,7 +63,7 @@ attiny.menu.clock.external16BOD.build.f_cpu=16000000L
 - Connect the [PJ102](https://www.pjon-technologies.com/collections/pj100-hardware/products/pjon-sensor-102) with the arduino 
 - Open the serial monitor
 
-You should be able to communicate with the sensor.
+You should now be able to communicate with [PJ102](https://www.pjon-technologies.com/collections/pj100-hardware/products/pjon-sensor-102) using the commands described in the software section.
 
 ### Schematic
 The circuit is quite simple and can be tested quickly on a breadboard. It is composed by few components such as the MCU, its clock, the voltage regulator, a couple of resistors, capacitors and obviously the DHT22.
