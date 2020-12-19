@@ -2,7 +2,7 @@
 ## PJ102
 <img src="images/PJ102-front.jpg" style="display: inline-block;" width="400"><img src="images/PJ102-back.jpg" style="display: inline-block;" width="400">
 
-The PJ102 module is a 36.1x34mm open-source, stand-alone, programmable temperature and humidity sensor based on DHT22 and ATtiny85 with [PJON](https://github.com/gioblu/PJON/) over [PJDL](https://github.com/gioblu/PJON/blob/master/src/strategies/SoftwareBitBang/specification) networking. It needs only 3 pins (PJDL, 5v, GND) to operate transmitting samples and receiving incoming configuration on the same PJON IO pin. PJ102 consumes around 0.162w when supplied with 9v.
+[PJ102](https://www.pjon-technologies.com/collections/pj100-hardware/products/pjon-sensor-102) is a 36.1x34mm open-source, stand-alone, programmable temperature and humidity sensor based on DHT22 and ATtiny85 with [PJON](https://github.com/gioblu/PJON/) over [PJDL](https://github.com/gioblu/PJON/blob/master/src/strategies/SoftwareBitBang/specification) networking. It needs only 3 pins (PJDL, 5v, GND) to operate transmitting samples and receiving incoming configuration on the same PJON IO pin. PJ102 consumes around 0.162w when supplied with 9v.
 
 ```cpp  
  _______   _______   _______
@@ -15,7 +15,7 @@ ______|_________|_________|______ GND
 ```
 Multiple PJ102s can be connected in parallel on the same [SoftwareBitBang](https://github.com/gioblu/PJON/tree/master/src/strategies/SoftwareBitBang) bus sharing the same power, ground and data connection. Each PJ102 is running an instance of the PJON protocol stack with its own configurable device id, so many can coexist on the same medium.
 
-PJ102 has been engineered with the strong feeling that in the future "smart homes" will not necessarily host an embedded real-time operative system in whatever "thing" and expose vulnerabilities out of their physical boundaries. Otherwise, more probably, they will host many less power-hungry microcontrollers connected to a wired communication bus.
+[PJ102](https://www.pjon-technologies.com/collections/pj100-hardware/products/pjon-sensor-102) has been engineered with the strong feeling that in the future "smart homes" will not necessarily host an embedded real-time operative system in whatever "thing" and expose vulnerabilities out of their physical boundaries. Otherwise, more probably, they will host many less power-hungry microcontrollers connected to a wired communication bus.
 
 ### Software
 A basic example program is proposed to let users easily configure the PJ102s using only a series of commands on its PJON [SoftwareBitBang](https://github.com/gioblu/PJON/tree/master/src/strategies/SoftwareBitBang) bus to avoid flashing the chip multiple times. With the [Console](software/Console/Console.ino) example and an Arduino compatible device it is possible to input configuration and request samples with an easy to use console interface. PJ102 accepts incoming requests if sent by `PJON_MASTER_ID` and its configured recipient id.
@@ -56,10 +56,14 @@ attiny.menu.clock.external16BOD.build.f_cpu=16000000L
 - Select Tools->Processor->ATtiny85
 - Select Tools->Clock->PJON PJ100 modules
 - Select Tools->Burn bootloader
-- Open PJ102.ino
+- Open `PJ102.ino`
 - Upload the program
+- Insert the chip in the [PJ102](https://www.pjon-technologies.com/collections/pj100-hardware/products/pjon-sensor-102) 
+- Program an Arduino with `Console.ino`
+- Connect the [PJ102](https://www.pjon-technologies.com/collections/pj100-hardware/products/pjon-sensor-102) with the arduino 
+- Open the serial monitor
 
-The chip should be good to go.
+You should be able to communicate with the sensor.
 
 ### Schematic
 The circuit is quite simple and can be tested quickly on a breadboard. It is composed by few components such as the MCU, its clock, the voltage regulator, a couple of resistors, capacitors and obviously the DHT22.
