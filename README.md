@@ -15,10 +15,10 @@ ______|_________|_________|______ GND
 ```
 Multiple PJ102s can be connected in parallel on the same [SoftwareBitBang](https://github.com/gioblu/PJON/tree/master/src/strategies/SoftwareBitBang) bus sharing the same power, ground and data connection. Each PJ102 is running an instance of the PJON protocol stack with its own configurable device id, so many can coexist on the same medium.
 
-PJ102 has been engineered with the strong feeling that in the future "smart homes" will not necessarily host an embedded real-time operative system in whatever "thing" and expose vulnerabilities out of their physical boundaries. Otherwise, more probably, they will host many less power-hungry microcontrollers connected to a wired communication bus.
+[PJ102](https://www.pjon-technologies.com/collections/pj100-hardware/products/pjon-sensor-102) has been engineered with the strong feeling that in the future "smart homes" will not necessarily host an embedded real-time operative system in whatever "thing" and expose vulnerabilities out of their physical boundaries. Otherwise, more probably, they will host many less power-hungry microcontrollers connected to a wired communication bus.
 
 ### Software
-A basic example program is proposed to let users easily configure the PJ102s using only a series of commands on its PJON [SoftwareBitBang](https://github.com/gioblu/PJON/tree/master/src/strategies/SoftwareBitBang) bus to avoid flashing the chip multiple times. With the [Console](software/Console/Console.ino) example and an Arduino compatible device it is possible to input configuration and request samples with an easy to use console interface. PJ102 accepts incoming requests if sent by `PJON_MASTER_ID` and its configured recipient id.
+A basic example program is proposed to let users easily configure the PJ102s using only a series of commands on its PJON [SoftwareBitBang](https://github.com/gioblu/PJON/tree/master/src/strategies/SoftwareBitBang) bus to avoid flashing the chip multiple times. PJ102 accepts incoming requests if sent by `PJON_MASTER_ID` and its configured recipient id.
 
 | Command                          | Parameter     | Effect                                                            |
 | -------------------------------- | --------------| ----------------------------------------------------------------- |
@@ -35,11 +35,9 @@ A basic example program is proposed to let users easily configure the PJ102s usi
 
 - `Q` For security reasons it is possible to block incoming configuration, although further configuration is possible flashing the [PJ102](software/PJ102/PJ102.ino) sketch on the ATtiny85 using an ISP programmer.
 
-The ATtiny85 must to be flashed with the [PJ102](software/PJ102/PJ102.ino) sketch using an ISP programmer, see [ATtiny85 interfacing](https://github.com/gioblu/PJON/wiki/ATtiny-interfacing)
-
-### How to install the software
+### How to upload the software
 The software is relatively easy to install:
-- Follow [High-Low Tech tutorial](http://highlowtech.org/?p=1695) by David Mellis and install the required software.  
+- Follow [High-Low Tech tutorial](http://highlowtech.org/?p=1695) by David Mellis and install the required software  
 - Locate the Arduino IDE `boards.txt` file (in Windows is in `C:\Users\your-user-name\AppData\Local\Arduino15\packages\attiny\hardware\avr\1.0.1`)
 - Add the code below at the end of the file and save it
 ```
@@ -57,10 +55,20 @@ attiny.menu.clock.external16BOD.build.f_cpu=16000000L
 - Select Tools->Processor->ATtiny85
 - Select Tools->Clock->PJON PJ100 modules
 - Select Tools->Burn bootloader
-- Open PJ102.ino
+- Open `PJ102.ino`
 - Upload the program
+- Insert the ATtiny85 in the socket
 
-The chip should be good to go.
+[PJ102](https://www.pjon-technologies.com/collections/pj100-hardware/products/pjon-sensor-102) should be ready for use
+
+### How to configure it
+With the [Console](software/Console/Console.ino) example and an Arduino compatible device it is possible to input configuration and request samples with an easy to use console interface:
+
+- Program an Arduino with `Console.ino`
+- Connect the [PJ102](https://www.pjon-technologies.com/collections/pj100-hardware/products/pjon-sensor-102) with the arduino
+- Open the serial monitor
+
+You should now be able to communicate with [PJ102](https://www.pjon-technologies.com/collections/pj100-hardware/products/pjon-sensor-102) using the commands described in the software section.
 
 ### Schematic
 The circuit is quite simple and can be tested quickly on a breadboard. It is composed by few components such as the MCU, its clock, the voltage regulator, a couple of resistors, capacitors and obviously the HDC1080.

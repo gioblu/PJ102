@@ -185,7 +185,7 @@ void receiver_function(uint8_t *payload, uint16_t length, const PJON_Packet_Info
   // Attention when Q is received the module will stop to accept commands
   if(is_master && (payload[0] == 'Q')) {
     accept_config_change = false;
-    EEPROM.update(10, 0);
+    EEPROM.update(11, 0);
   }
 };
 
