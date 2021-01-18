@@ -1,8 +1,8 @@
 
 ## PJ102
-<img src="images/PJ102-front.jpg" style="display: inline-block;" width="400"><img src="images/PJ102-back.jpg" style="display: inline-block;" width="400">
+<img src="images/PJ102-front.jpg" style="display: inline-block; margin: 0 auto;" width="500">
 
-The PJ102 module is a 36.1x34mm open-source, stand-alone, programmable temperature and humidity sensor based on DHT22 and ATtiny85 with [PJON](https://github.com/gioblu/PJON/) over [PJDL](https://github.com/gioblu/PJON/blob/master/src/strategies/SoftwareBitBang/specification) networking. It needs only 3 pins (PJDL, 5v, GND) to operate transmitting samples and receiving incoming configuration on the same PJON IO pin. PJ102 consumes around 0.162w when supplied with 9v.
+The PJ102 module is a 29x16mm open-source, stand-alone, programmable temperature and humidity sensor based on HDC1080 and ATtiny85 with [PJON](https://github.com/gioblu/PJON/) over [PJDL](https://github.com/gioblu/PJON/blob/master/src/strategies/SoftwareBitBang/specification) networking. It needs only 3 pins (PJDL, 5v, GND) to operate transmitting samples and receiving incoming configuration on the same PJON IO pin. PJ102 consumes around 0.162w when supplied with 9v.
 
 ```cpp  
  _______   _______   _______
@@ -23,12 +23,13 @@ A basic example program is proposed to let users easily configure the PJ102s usi
 | Command                          | Parameter     | Effect                                                            |
 | -------------------------------- | --------------| ----------------------------------------------------------------- |
 |  `?` Info                        | none          | Transmits module name and software version                        |
+|  `C` Calibration                 | `int8_t`      | Sets calibration value (expressed in tenth of degrees Celsius)    |
 |  `E` Execute                     | none          | Reads a new sample from the DTH and transmits it to the recipient |
 |  `G` Get                         | none          | Transmits the latest sample to the recipient                      |
 |  `S` Save                        | none          | Reads a new sample and saves it in memory                         |
 |  `I` Device id                   | `uint8_t`     | Sets device id                                                    |
 |  `R` Recipient device id         | `uint8_t`     | Sets recipient id                                                 |
-|  `T` Transmission interval       | `uint16_t`    | Sets transmission interval                                        |
+|  `T` Sleep then transmit         | `uint16_t`    | Sleep for n milliseconds and then transmit reading                |
 |  `Q` Configuration block         | none          | Blocks incoming configuration                                     |
 |  `X` Configuration reset         | none          | Sets configuration to default                                     |
 
@@ -62,7 +63,7 @@ attiny.menu.clock.external16BOD.build.f_cpu=16000000L
 The chip should be good to go.
 
 ### Schematic
-The circuit is quite simple and can be tested quickly on a breadboard. It is composed by few components such as the MCU, its clock, the voltage regulator, a couple of resistors, capacitors and obviously the DHT22.
+The circuit is quite simple and can be tested quickly on a breadboard. It is composed by few components such as the MCU, its clock, the voltage regulator, a couple of resistors, capacitors and obviously the HDC1080.
 
 ![PJ102 schematic](schematics/PJ102.pdf)
 

@@ -1,9 +1,9 @@
 
-/* P102 temperature and humidity sensor configuration console
+/* PJ102 temperature and humidity sensor configuration console
    Giovanni Blu Mitolo 2020
  This is a basic example to show how PJON can be used practically.
- The Serial monitor is used to configure and print data from P102 */
-
+ The Serial monitor is used to configure and print data from PJ102 */
+#define PJON_MASTER_ID 254
 #define PJON_PACKET_MAX_LENGTH 20
 #define PJON_MAX_PACKETS 2
 #include <PJONSoftwareBitBang.h>
@@ -24,7 +24,7 @@ void setup() {
   bus.set_receiver(receiver_function);
   bus.set_error(error_handler);
   Serial.begin(115200);
-  Serial.println("P102 DHT22 temperature and humodity module configuration console - Giovanni Blu Mitolo 2020");
+  Serial.println("PJ102 HDC1080 temperature and humodity module configuration console - Giovanni Blu Mitolo 2020");
   print_help();
 };
 
@@ -51,7 +51,7 @@ void receiver_function(uint8_t *payload, uint16_t length, const PJON_Packet_Info
 
 void error_handler(uint8_t code, uint8_t data) {
   if(code == PJON_CONNECTION_LOST) {
-    Serial.print("Connection lost - P102 ID ");
+    Serial.print("Connection lost - PJ102 ID ");
     Serial.println((uint8_t)bus.packets[data].content[0]);
   }
   if(code == PJON_PACKETS_BUFFER_FULL) {
@@ -68,15 +68,16 @@ void error_handler(uint8_t code, uint8_t data) {
 
 void print_help() {
   Serial.println();
-  Serial.println("Use the Serial console input field to configure the P102 module.");
+  Serial.println("Use the Serial console input field to configure the PJ102 module.");
   Serial.println("Input commands guide: ");
   Serial.println("?!        -> Help and device info");
-  Serial.println("E!        -> Read the DHT sensor and transmit over PJON");
-  Serial.println("S!        -> Read the DHT sensor and save in memory");
+  Serial.println("C+-127!   -> Temperature calibration (0.1 °C)");
+  Serial.println("E!        -> Read the HDC1080 sensor and transmit over PJON");
+  Serial.println("S!        -> Read the HDC1080 sensor and save in memory");
   Serial.println("G!        -> Transmit the latest reading");
   Serial.println("I1-254!   -> Configure module id");
   Serial.println("R0-255!   -> Configure recipient id");
-  Serial.println("T0-65535! -> Configure state change interval");
+  Serial.println("T0-65535! -> Sleep for n milliseconds and then transmit reading");
   Serial.println("Q!        -> Block incoming configuration (caution)");
   Serial.println("X!        -> Configuration reset");
   Serial.println();
@@ -99,11 +100,12 @@ void loop() {
       uint8_t packet_length = 0;
       // Configuration update
       if((char)packet[0] == 'C') {
-        packet[1] = (uint8_t)string_number.toInt();
+        packet[1] = string_number.toInt();
         packet_length = 2;
         bus.send(recipient_id, packet, packet_length);
-        Serial.print("Setting P102 configuration: ");
-        Serial.print(packet[1]);
+        Serial.print("Setting PJ102 temperature calibration: ");
+        Serial.print(string_number.toInt() / 10.0);
+        Serial.println(" °C");
         Serial.flush();
       }
       // Sample and then transmit reading
@@ -130,7 +132,7 @@ void loop() {
         packet[1] = (uint8_t)string_number.toInt();
         bus.send(recipient_id, packet, packet_length);
         recipient_id = packet[1];
-        Serial.print("Setting P102 device id: ");
+        Serial.print("Setting PJ102 device id: ");
         Serial.println(packet[1]);
         Serial.flush();
       }
@@ -139,7 +141,7 @@ void loop() {
         packet_length = 1;
         bus.send(recipient_id, packet, packet_length);
         Serial.println("Blocking further incoming configuration!");
-        Serial.println("Flash the P102 module with P102.ino to unblock!");
+        Serial.println("Flash the PJ102 module with PJ102.ino to unblock!");
         Serial.print(packet[1]);
         Serial.flush();
       }
@@ -169,8 +171,9 @@ void loop() {
         packet[2] = string_number.toInt() & 0xFF;
         packet_length = 3;
         bus.send(recipient_id, packet, packet_length);
-        Serial.print("Setting state change interval: ");
-        Serial.println(string_number.toInt());
+        Serial.print("Sleep for: ");
+        Serial.print(string_number.toInt());
+        Serial.println(" milliseconds then send measurement.");
         Serial.flush();
       }
       // Configuration reset to default
